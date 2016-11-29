@@ -9,6 +9,8 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.ws.config.annotation.EnableWs;
 import org.springframework.ws.config.annotation.WsConfigurerAdapter;
 
+import com.testyourskills.util.ApplicationConstant;
+
 
 /**
  *This class is used to configure the spring based SOAP web-service.

@@ -1,4 +1,4 @@
-package com.testyourskills.config;
+package com.testyourskills.util;
 
 /**
  * This class is used to store various constants

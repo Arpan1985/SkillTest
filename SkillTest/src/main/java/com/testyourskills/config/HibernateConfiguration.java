@@ -17,6 +17,8 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.testyourskills.util.ApplicationConstant;
+
 /**
  * This class is used to configure Hibernate to be used in the application
  */

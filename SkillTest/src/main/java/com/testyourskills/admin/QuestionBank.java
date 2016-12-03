@@ -1,4 +1,4 @@
-package com.testyourskills.util;
+package com.testyourskills.admin;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,12 +21,12 @@ import com.testyourskills.vo.ValidTopicVO;
 
 public class QuestionBank {
 
-public static void main(String[] args) throws InvalidFormatException {
+/*public static void main(String[] args) throws InvalidFormatException {
 	QuestionBank questionBank = new QuestionBank();
 	File file =new File("C:\\Users\\417198\\Desktop\\Java_Qn.xlsx");
 	List<QuestionVO> importQuestions = questionBank.importQuestions(file);
 	System.out.println(importQuestions.size());
-}
+}*/
 	public List<QuestionVO> importQuestions(File file) throws InvalidFormatException {
 		List<QuestionVO> questionVOs = new ArrayList<>();
 		try {

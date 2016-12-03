@@ -11,8 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
 import org.springframework.core.env.Environment;
-import org.springframework.jdbc.datasource.lookup.JndiDataSourceLookup;
-import org.springframework.jndi.JndiObjectFactoryBean;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -55,11 +54,12 @@ public class HibernateConfiguration {
      */
     @Bean
     public DataSource dataSource() {
-    	 JndiObjectFactoryBean jndiObjectFactoryBean = new JndiObjectFactoryBean();
-         String jndi_name = environment.getRequiredProperty(ApplicationConstant.JNDI_NAME);
-         jndiObjectFactoryBean.setJndiName(jndi_name);
-         JndiDataSourceLookup dataSourceLookup = new JndiDataSourceLookup();
-         return dataSourceLookup.getDataSource(jndi_name);
+    	 DriverManagerDataSource ds = new DriverManagerDataSource();        
+         ds.setDriverClassName(environment.getRequiredProperty(ApplicationConstant.DRIVER_CLASS));
+         ds.setUrl(environment.getRequiredProperty(ApplicationConstant.DB_URL));
+         ds.setUsername(environment.getRequiredProperty(ApplicationConstant.USERNAME));
+         ds.setPassword(environment.getRequiredProperty(ApplicationConstant.PASSWORD));        
+         return ds;
     }
 
     /**

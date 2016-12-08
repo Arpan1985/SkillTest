@@ -1,8 +1,8 @@
 package com.testyourskills.admin;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -12,13 +12,14 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.stereotype.Component;
 
 import com.testyourskills.vo.AnswerVO;
 import com.testyourskills.vo.OptionsVO;
 import com.testyourskills.vo.QuestionVO;
 import com.testyourskills.vo.ValidCategoryVO;
 import com.testyourskills.vo.ValidTopicVO;
-
+@Component
 public class QuestionBank {
 
 /*public static void main(String[] args) throws InvalidFormatException {
@@ -27,11 +28,11 @@ public class QuestionBank {
 	List<QuestionVO> importQuestions = questionBank.importQuestions(file);
 	System.out.println(importQuestions.size());
 }*/
-	public List<QuestionVO> importQuestions(File file) throws InvalidFormatException {
+	public List<QuestionVO> importQuestions(InputStream stream) throws InvalidFormatException {
 		List<QuestionVO> questionVOs = new ArrayList<>();
 		try {
 			// Get the workbook instance for XLS file
-			XSSFWorkbook workbook = new XSSFWorkbook(file);
+			XSSFWorkbook workbook = new XSSFWorkbook(stream);
 			// Get first sheet from the workbook
 			XSSFSheet sheet = workbook.getSheetAt(0);
 			// Iterate through each rows from first sheet

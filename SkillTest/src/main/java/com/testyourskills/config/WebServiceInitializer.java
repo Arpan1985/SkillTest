@@ -17,7 +17,7 @@ import org.springframework.context.annotation.ComponentScan;
  * will be picked up by the application server on deployment
  */
 @SpringBootApplication
-@ComponentScan(basePackages={""})
+@ComponentScan(basePackages={"com.testyourskills"})
 @EnableAutoConfiguration
 public class WebServiceInitializer extends SpringBootServletInitializer {
 

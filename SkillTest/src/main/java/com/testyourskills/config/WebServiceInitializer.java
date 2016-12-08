@@ -3,12 +3,13 @@ package com.testyourskills.config;
 import javax.faces.webapp.FacesServlet;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.WebApplicationInitializer;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * Spring boot initializer class containing the main method.
@@ -16,7 +17,9 @@ import org.springframework.web.WebApplicationInitializer;
  * will be picked up by the application server on deployment
  */
 @SpringBootApplication
-public class WebServiceInitializer extends SpringBootServletInitializer implements WebApplicationInitializer {
+@ComponentScan(basePackages={""})
+@EnableAutoConfiguration
+public class WebServiceInitializer extends SpringBootServletInitializer {
 
 	    /**
 	     * The main method will be invoked initially by Spring boot

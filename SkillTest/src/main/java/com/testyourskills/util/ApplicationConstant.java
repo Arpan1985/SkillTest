@@ -37,6 +37,7 @@ public class ApplicationConstant {
 	 *The variable to indicate whether Hibernate should format the SQL queries generated
 	 */
 	public static final String HIBERNATE_FORMAT_SQL="hibernate.format_sql";
+	public static final String DDL= "hibernate.hbm2ddl.auto";
 	/**
 	 *The variable to store the URL mapping for the Payment Reconciliation web-service
 	 */

@@ -71,6 +71,7 @@ public class HibernateConfiguration {
         properties.put(ApplicationConstant.HIBERNATE_DIALECT, environment.getRequiredProperty(ApplicationConstant.HIBERNATE_DIALECT));
         properties.put(ApplicationConstant.HIBERNATE_SHOW_SQL, environment.getRequiredProperty(ApplicationConstant.HIBERNATE_SHOW_SQL));
         properties.put(ApplicationConstant.HIBERNATE_FORMAT_SQL, environment.getRequiredProperty(ApplicationConstant.HIBERNATE_FORMAT_SQL));
+        properties.put(ApplicationConstant.DDL, environment.getRequiredProperty(ApplicationConstant.DDL));
         return properties;
     }
 

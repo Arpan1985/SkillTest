@@ -1,8 +1,11 @@
 package com.testyourskills.controller;
 
+import java.io.Serializable;
+
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.FileUploadEvent;
@@ -13,7 +16,8 @@ import org.springframework.web.jsf.FacesContextUtils;
 import com.testyourskills.admin.QuestionBank;
 
 @ManagedBean(name="fileUploadView")
-public class FileUploadView {
+@SessionScoped
+public class FileUploadView implements Serializable{
 	
    @Autowired
    private QuestionBank questionBank;

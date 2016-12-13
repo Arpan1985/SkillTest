@@ -11,12 +11,12 @@
 		<hibernate.version>4.3.11.Final</hibernate.version>
 	</properties>
 	<repositories>
-	<repository>
-		<id>prime-repo</id>
-		<name>Prime Repo</name>
-		<url>http://repository.primefaces.org</url>
-	</repository>
-</repositories>
+		<repository>
+			<id>prime-repo</id>
+			<name>Prime Repo</name>
+			<url>http://repository.primefaces.org</url>
+		</repository>
+	</repositories>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -116,11 +116,11 @@
 			<version>2.2.7</version>
 			<scope>compile</scope>
 		</dependency>
-<dependency>
-    <groupId>org.primefaces</groupId>
-    <artifactId>primefaces</artifactId>
-    <version>6.0</version>
-</dependency>
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>6.0</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
@@ -144,28 +144,26 @@
 			<version>5.1.39</version>
 		</dependency>
 		<dependency>
-    <groupId>javax.servlet</groupId>
-    <artifactId>jsp-api</artifactId>
-    <version>2.0</version>
- </dependency>
- <dependency>
-    <groupId>javax.servlet</groupId>
-    <artifactId>jstl</artifactId>
-</dependency>
-<!-- https://mvnrepository.com/artifact/javax.el/javax.el-api -->
-<dependency>
-    <groupId>javax.el</groupId>
-    <artifactId>javax.el-api</artifactId>
-    <version>2.2.5</version>
-</dependency>
-<!-- https://mvnrepository.com/artifact/el-impl/el-impl -->
-<!-- https://mvnrepository.com/artifact/org.glassfish.web/el-impl -->
-<dependency>
-    <groupId>org.glassfish.web</groupId>
-    <artifactId>el-impl</artifactId>
-    <version>2.2</version>
-</dependency>
-<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/javax.el/javax.el-api -->
+		<dependency>
+			<groupId>javax.el</groupId>
+			<artifactId>javax.el-api</artifactId>
+			<version>2.2.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.web</groupId>
+			<artifactId>el-impl</artifactId>
+			<version>2.2</version>
+		</dependency>
+		<dependency>
 			<groupId>org.primefaces.themes</groupId>
 			<artifactId>bluesky</artifactId>
 			<version>1.0.10</version>

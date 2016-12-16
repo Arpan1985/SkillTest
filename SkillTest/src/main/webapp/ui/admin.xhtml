@@ -1,15 +1,15 @@
 <ui:composition template="/ui/templates/layout.xhtml"
-     xmlns="http://www.w3.org/1999/xhtml"
-     xmlns:f="http://java.sun.com/jsf/core"
-     xmlns:h="http://java.sun.com/jsf/html"
-     xmlns:ui="http://java.sun.com/jsf/facelets"
-     xmlns:p="http://primefaces.org/ui">
-     <ui:define name="content">
-     <h:form>
-       <p:fileUpload fileUploadListener="#{fileUploadView.handleFileUpload}" mode="advanced"
-                     update="messages" auto="true" sizeLimit="100000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
- 
-    <p:growl id="messages" showDetail="true" />
-	    </h:form>
-     </ui:define>
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="content">
+		<h:form id="form" prependId="false" enctype="multipart/form-data">
+			<p:fileUpload fileUploadListener="#{fileUploadView.handleFileUpload}"
+				mode="advanced" auto="true" sizeLimit="100000" value="#{fileUploadView.file}"
+				allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+			<p:growl id="messages" showDetail="true" />
+		</h:form>
+	</ui:define>
 </ui:composition>

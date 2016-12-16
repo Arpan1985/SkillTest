@@ -1,6 +1,10 @@
 package com.testyourskills.config;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.faces.webapp.FacesServlet;
+import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletContext;
@@ -49,37 +53,36 @@ public class WebServiceInitializer extends SpringBootServletInitializer {
 	       filterRegistrationBean.setName("PrimeFaces FileUpload Filter");
 			return filterRegistrationBean;
 	    }*/
-	    @Bean
+	   /* @Bean
 	    public Filter addFilter(){
 	    	 FileUploadFilter fileUploadFilter = new FileUploadFilter();
 	    	 return  fileUploadFilter;
-	    }
+	    }*/
 	    @Bean
-	    public ServletRegistrationBean servletRegistrationBean(MultipartConfigElement conf) {
+	    public ServletRegistrationBean servletRegistrationBean() {
 	        FacesServlet servlet = new FacesServlet();
-	        ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(servlet, "*.jsf");
-	        servletRegistrationBean.setName("Faces Servlet");servletRegistrationBean.setMultipartConfig(conf);
-
+	        ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(servlet);
+	        ArrayList<String> patterns = new ArrayList<>();
+	      //  patterns.add("*.jsf");
+	        patterns.add("/faces/*");
+	        patterns.add("*.xhtml");
+	        servletRegistrationBean.setUrlMappings(patterns);
+	        servletRegistrationBean.setName("Faces Servlet");
 			return servletRegistrationBean;
 	    }
-	    @Bean
+	  /*  @Bean
 	    public ServletContextInitializer initializer() {
 	        return new ServletContextInitializer() {
 	            @Override
 	            public void onStartup(ServletContext servletContext)
 	                    throws ServletException {
 	                servletContext.setInitParameter("primefaces.THEME", "bluesky");
-	                servletContext.setInitParameter(
-	                        "javax.faces.FACELETS_SKIP_COMMENTS", "true");
-	                servletContext.setInitParameter(
-	                        "com.sun.faces.expressionFactory",
-	                        "com.sun.el.ExpressionFactoryImpl");
 	                servletContext.setInitParameter("primefaces.UPLOADER",
-	                        "commons");
+	                        "auto");
 	            }
 	        };
-	    }
-	    @Bean
+	    }*/
+	  /*  @Bean
 	    public FilterRegistrationBean contextFilterRegistrationBean() {
 
 	        FilterRegistrationBean registrationBean = new FilterRegistrationBean();
@@ -87,7 +90,26 @@ public class WebServiceInitializer extends SpringBootServletInitializer {
 	        registrationBean.setFilter(fileUploadFilter);
 	        registrationBean.addUrlPatterns("*.jsf");
 	    return registrationBean;
-	    }
+	    }*/
+	    
+	   /* @Bean
+	    public FilterRegistrationBean myFilterRegistration() {
+	        FilterRegistrationBean registration = new FilterRegistrationBean();
+	        registration.setDispatcherTypes(DispatcherType.FORWARD);
+
+	        org.primefaces.webapp.filter.FileUploadFilter fuf=  new FileUploadFilter();
+	        List<String> urlPatterns = new ArrayList<String>();
+	        urlPatterns.add("*.jsf");
+	        urlPatterns.add("/*");
+	        urlPatterns.add("/ui/*");
+	        registration.setUrlPatterns(urlPatterns);
+	        registration.setFilter(fuf);
+
+	        return registration;
+	    }*/
+
+
+	    
 	    /**
 		 * This spring bean definition is used as part of Spring AOP Aspect configuration
 		 * so that Spring CGLIB proxy (enabling autoproxy) can be used.

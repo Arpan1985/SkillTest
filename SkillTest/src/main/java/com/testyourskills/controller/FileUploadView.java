@@ -17,7 +17,7 @@ import com.testyourskills.admin.QuestionBank;
 
 @ManagedBean(name="fileUploadView")
 @SessionScoped
-public class FileUploadView implements Serializable{
+public class FileUploadView{
 	
    @Autowired
    private QuestionBank questionBank;

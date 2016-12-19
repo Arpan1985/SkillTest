@@ -3,6 +3,8 @@ package com.testyourskills.entitybean;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -25,7 +27,7 @@ public class UsersBean implements java.io.Serializable {
 	}
 
 	@Id
-
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "USER_ID", unique = true, nullable = false, precision = 22, scale = 0)
 	public Long getUserId() {
 		return this.userId;

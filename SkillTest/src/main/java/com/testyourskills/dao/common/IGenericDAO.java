@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @param <T>
  * @param <PK>
  */
-public interface GenericDAO<T,PK extends Serializable> {
+public interface IGenericDAO<T,PK extends Serializable> {
 
 	/**
 	 * This method inserts the given object in the database and returns the primary key
@@ -16,17 +16,19 @@ public interface GenericDAO<T,PK extends Serializable> {
 	 * @return T
 	 */
 	 T insert(T obj);
-	 
 	 /**
 	 * @param obj
 	 * @return
 	 */
-	T update(T obj);
-	 
+	void update(T obj);
 	 /**
 	 * @param id
 	 * @return
 	 */
 	T get(PK id);
+	/**
+	 * @param obj
+	 */
+	void saveOrUpdate(T obj);
 	 
 }

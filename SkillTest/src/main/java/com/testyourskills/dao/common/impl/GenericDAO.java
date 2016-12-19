@@ -6,7 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.testyourskills.dao.common.GenericDAO;
+import com.testyourskills.dao.common.IGenericDAO;
 
 /**
  *This class contains the DAO methods used in the application
@@ -14,8 +14,8 @@ import com.testyourskills.dao.common.GenericDAO;
  * @param <T>
  * @param <PK>
  */
-public abstract class GenericDAOImpl<T,PK extends Serializable>
-implements GenericDAO<T,PK>
+public abstract class GenericDAO<T,PK extends Serializable>
+implements IGenericDAO<T,PK>
 {
 	/**
 	 *This variable holds the SessionFactory instance
@@ -33,7 +33,7 @@ implements GenericDAO<T,PK>
 	 * Parameterized constructor of the class.
 	 * @param obj
 	 */
-	public GenericDAOImpl(final Class<T> obj){
+	public GenericDAO(final Class<T> obj){
 		this.clazz=obj;
 	}
 
@@ -47,16 +47,20 @@ implements GenericDAO<T,PK>
 		getSession().save(obj);
 		return obj;
 	}
-	
 	 /**
 	 * @param obj
 	 * @return
 	 */
 	@Override
-	public T update(T obj){
-		  return (T)getSession().merge(obj);
+	public void update(T obj){
+		getSession().update(obj);
 	}
-	 
+	
+	@Override
+	public void saveOrUpdate(T obj){
+		getSession().saveOrUpdate(obj);
+	}
+	
 	 /**
 	 * @param id
 	 * @return
@@ -65,10 +69,7 @@ implements GenericDAO<T,PK>
 	public T get(PK id){
 		return  (T)getSession().get(clazz, id);
 	}
-	public long generatePrimaryKey(){
-		return 1;
-	}
-
+	
 	/**
 	 * @param sessionFactory
 	 */

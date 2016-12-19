@@ -9,7 +9,6 @@
 		<main.basedir>${basedir}/../..</main.basedir>
 		<java.version>1.7</java.version>
 		<hibernate.version>4.3.11.Final</hibernate.version>
-		<tomcat.version>7.0.64</tomcat.version>
 	</properties>
 	<repositories>
 		<repository>
@@ -42,8 +41,6 @@
 		</plugins>
 	</build>
 	<dependencies>
-		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-tomcat</artifactId> 
-			</dependency> -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -115,10 +112,6 @@
 			<artifactId>spring-web</artifactId>
 			<scope>compile</scope>
 		</dependency>
-		<!-- <dependency> <groupId>org.apache.tomcat.embed</groupId> <artifactId>tomcat-embed-core</artifactId> 
-			<version>7.0.34</version> <scope>compile</scope> </dependency> <dependency> 
-			<groupId>org.apache.tomcat.embed</groupId> <artifactId>tomcat-embed-logging-juli</artifactId> 
-			<version>7.0.34</version> <scope>compile</scope> </dependency> -->
 		<dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
@@ -127,7 +120,6 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
-			<version>5.1.2.Final</version>
 		</dependency>
 		<!-- JSF library -->
 		<dependency>
@@ -148,7 +140,6 @@
 			<artifactId>jsf-api</artifactId>
 			<version>2.2.4</version>
 		</dependency>
-		<!-- Primefaces Version 5 -->
 		<dependency>
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
@@ -164,7 +155,6 @@
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
-			<version>1.1.2</version>
 		</dependency>
 
 		<dependency>
@@ -177,7 +167,6 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.17</version>
 		</dependency>
 
 		<dependency>
@@ -185,11 +174,10 @@
 			<artifactId>c3p0</artifactId>
 			<version>0.9.1.2</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
-			<version>3.0.1</version>
+			<scope>provided</scope>
 		</dependency>
 
 	</dependencies>

@@ -1,6 +1,6 @@
 package com.testyourskills.controller;
 
-import java.io.Serializable;
+import java.io.IOException;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -8,28 +8,30 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.jsf.FacesContextUtils;
 
-import com.testyourskills.admin.QuestionBank;
+import com.testyourskills.service.admin.impl.QuestionBank;
 
-@ManagedBean(name="fileUploadView")
+@ManagedBean(name="questionUploadView")
 @SessionScoped
-public class FileUploadView{
+public class QuestionUploadView{
 	
    @Autowired
    private QuestionBank questionBank;
    private UploadedFile file;
    
    public void handleFileUpload(FileUploadEvent event) {
-       FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
-       FacesContext.getCurrentInstance().addMessage(null, message);
-   }
-   public void handleFileUpload2() {
-       FacesMessage message = new FacesMessage("Succesful", " is uploaded.");
-       FacesContext.getCurrentInstance().addMessage(null, message);
+	   try {
+		   questionBank.importQuestions(event.getFile().getInputstream());
+	   } catch (InvalidFormatException | IOException e) {
+		   e.printStackTrace();
+	   }
+	   FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
+	   FacesContext.getCurrentInstance().addMessage(null, message);
    }
 
 public QuestionBank getQuestionBank() {

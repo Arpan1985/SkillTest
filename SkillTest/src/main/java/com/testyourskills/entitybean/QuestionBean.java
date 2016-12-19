@@ -1,15 +1,17 @@
 package com.testyourskills.entitybean;
 // Generated Nov 26, 2016 12:50:39 AM by Hibernate Tools 4.3.1
 
-import java.sql.Blob;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -27,7 +29,7 @@ public class QuestionBean implements java.io.Serializable {
 	private static final long serialVersionUID = -2147946795677163510L;
 	private Long questionId;
 	private ValidTopicBean validTopicBean;
-	private Blob qnDesc;
+	private String qnDesc;
 	private Set<OptionsBean> optionses = new HashSet<OptionsBean>(0);
 	private Set<AnswerBean> answerBeans = new HashSet<AnswerBean>(0);
 
@@ -35,7 +37,7 @@ public class QuestionBean implements java.io.Serializable {
 	}
 
 	@Id
-
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "QUESTION_ID", unique = true, nullable = false, precision = 22, scale = 0)
 	public Long getQuestionId() {
 		return this.questionId;
@@ -54,13 +56,13 @@ public class QuestionBean implements java.io.Serializable {
 	public void setValidTopic(ValidTopicBean validTopicBean) {
 		this.validTopicBean = validTopicBean;
 	}
-
+	@Lob
 	@Column(name = "QN_DESC")
-	public Blob getQnDesc() {
+	public String getQnDesc() {
 		return this.qnDesc;
 	}
 
-	public void setQnDesc(Blob qnDesc) {
+	public void setQnDesc(String qnDesc) {
 		this.qnDesc = qnDesc;
 	}
 

@@ -1,4 +1,4 @@
-package com.testyourskills.admin;
+package com.testyourskills.service.admin.impl;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -12,22 +12,30 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.testyourskills.arch.mapper.OrikaBeanMapper;
+import com.testyourskills.dao.IQuestionBankDAO;
+import com.testyourskills.entitybean.QuestionBean;
+import com.testyourskills.service.admin.IQuestionBank;
 import com.testyourskills.vo.AnswerVO;
 import com.testyourskills.vo.OptionsVO;
 import com.testyourskills.vo.QuestionVO;
 import com.testyourskills.vo.ValidCategoryVO;
 import com.testyourskills.vo.ValidTopicVO;
-@Component
-public class QuestionBank {
 
-/*public static void main(String[] args) throws InvalidFormatException {
-	QuestionBank questionBank = new QuestionBank();
-	File file =new File("C:\\Users\\417198\\Desktop\\Java_Qn.xlsx");
-	List<QuestionVO> importQuestions = questionBank.importQuestions(file);
-	System.out.println(importQuestions.size());
-}*/
+@Service
+public class QuestionBank implements IQuestionBank{
+	
+	@Autowired
+	private IQuestionBankDAO questionBankDAO; 
+	@Autowired
+	private OrikaBeanMapper orikaBeanMapper;
+	
+	@Override
 	public List<QuestionVO> importQuestions(InputStream stream) throws InvalidFormatException {
 		List<QuestionVO> questionVOs = new ArrayList<>();
 		try {
@@ -40,9 +48,9 @@ public class QuestionBank {
 			while (rowIterator.hasNext()) {
 				QuestionVO questionVO = createQuestionVO(rowIterator.next());
 				questionVOs.add(questionVO);
-				System.out.println("");
 			}
 			workbook.close();
+			insertQuestions(questionVOs);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -50,6 +58,28 @@ public class QuestionBank {
 		}
 		return questionVOs;
 	}
+	
+	@Transactional(readOnly=false)
+	private void insertQuestions(List<QuestionVO> questionVOs) {
+		if(questionVOs!=null && !questionVOs.isEmpty()){
+			List<QuestionBean> questionBeanList = new ArrayList<>();
+			int loopCnt= 0;
+			for (QuestionVO questionVO:questionVOs) {
+				if(loopCnt==0){
+					loopCnt++;
+					continue;
+				}
+				QuestionBean questions = orikaBeanMapper.map(questionVO, QuestionBean.class);
+				questionBeanList.add(questions);
+			}
+			questionBankDAO.insertQuestions(questionBeanList);
+		}
+
+	}
+	/**
+	 * @param row
+	 * @return
+	 */
 	private QuestionVO createQuestionVO(Row row) {
 		// For each row, iterate through each columns
 		Iterator<Cell> cellIterator = row.cellIterator();
@@ -79,31 +109,46 @@ public class QuestionBank {
 				options.add(option);
 				break;
 			case 7:
-				
 				//check if question has multiple answers
-					String[] multipleAnswers = cell.getStringCellValue().split(",");
-					for (String singleAnswer : multipleAnswers) {
-						AnswerVO answer = new AnswerVO();
-						answer.setQuestion(questionVO);
-						if(singleAnswer.equalsIgnoreCase("Option1")){
-							answer.setOptions(options.get(0));
-						}
-						if(singleAnswer.equalsIgnoreCase("Option2")){
-							answer.setOptions(options.get(1));
-						}
-						if(singleAnswer.equalsIgnoreCase("Option3")){
-							answer.setOptions(options.get(2));
-						}
-						if(singleAnswer.equalsIgnoreCase("Option4")){
-							answer.setOptions(options.get(3));
-						}
-						answers.add(answer);
+				String[] multipleAnswers = cell.getStringCellValue().split(",");
+				for (String singleAnswer : multipleAnswers) {
+					AnswerVO answer = new AnswerVO();
+					answer.setQuestion(questionVO);
+					if(singleAnswer.equalsIgnoreCase("Option1")){
+						answer.setOptions(options.get(0));
 					}
+					if(singleAnswer.equalsIgnoreCase("Option2")){
+						answer.setOptions(options.get(1));
+					}
+					if(singleAnswer.equalsIgnoreCase("Option3")){
+						answer.setOptions(options.get(2));
+					}
+					if(singleAnswer.equalsIgnoreCase("Option4")){
+						answer.setOptions(options.get(3));
+					}
+					answers.add(answer);
+				}
 				break;
 			} 
 		}
 		questionVO.setOptions(options);
 		questionVO.setAnswers(answers);
 		return questionVO;
+	}
+
+	public OrikaBeanMapper getOrikaBeanMapper() {
+		return orikaBeanMapper;
+	}
+
+	public void setOrikaBeanMapper(OrikaBeanMapper orikaBeanMapper) {
+		this.orikaBeanMapper = orikaBeanMapper;
+	}
+
+	public IQuestionBankDAO getQuestionBankDAO() {
+		return questionBankDAO;
+	}
+
+	public void setQuestionBankDAO(IQuestionBankDAO questionBankDAO) {
+		this.questionBankDAO = questionBankDAO;
 	}
 }

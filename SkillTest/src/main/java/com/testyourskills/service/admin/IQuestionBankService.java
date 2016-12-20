@@ -7,7 +7,7 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 import com.testyourskills.vo.QuestionVO;
 
-public interface IQuestionBank {
+public interface IQuestionBankService {
 	
 	/**
 	 * @param stream

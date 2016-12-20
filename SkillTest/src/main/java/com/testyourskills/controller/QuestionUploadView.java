@@ -14,14 +14,14 @@ import org.primefaces.model.UploadedFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.jsf.FacesContextUtils;
 
-import com.testyourskills.service.admin.impl.QuestionBank;
+import com.testyourskills.service.admin.IQuestionBankService;
 
 @ManagedBean(name="questionUploadView")
 @SessionScoped
 public class QuestionUploadView{
 	
    @Autowired
-   private QuestionBank questionBank;
+   private IQuestionBankService questionBank;
    private UploadedFile file;
    
    public void handleFileUpload(FileUploadEvent event) {
@@ -33,14 +33,6 @@ public class QuestionUploadView{
 	   FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
 	   FacesContext.getCurrentInstance().addMessage(null, message);
    }
-
-public QuestionBank getQuestionBank() {
-	return questionBank;
-}
-
-public void setQuestionBank(QuestionBank questionBank) {
-	this.questionBank = questionBank;
-}
 
 public UploadedFile getFile() {
 	return file;
@@ -55,7 +47,5 @@ private void init() {
     FacesContextUtils
         .getRequiredWebApplicationContext(FacesContext.getCurrentInstance())
         .getAutowireCapableBeanFactory().autowireBean(this);
-
-    // springBeanName is now available.
 }
 }

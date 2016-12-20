@@ -14,13 +14,12 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.testyourskills.arch.mapper.OrikaBeanMapper;
 import com.testyourskills.dao.IQuestionBankDAO;
 import com.testyourskills.entitybean.QuestionBean;
-import com.testyourskills.service.admin.IQuestionBank;
+import com.testyourskills.service.admin.IQuestionBankService;
 import com.testyourskills.vo.AnswerVO;
 import com.testyourskills.vo.OptionsVO;
 import com.testyourskills.vo.QuestionVO;
@@ -28,7 +27,7 @@ import com.testyourskills.vo.ValidCategoryVO;
 import com.testyourskills.vo.ValidTopicVO;
 
 @Service
-public class QuestionBank implements IQuestionBank{
+public class QuestionBankService implements IQuestionBankService{
 	
 	@Autowired
 	private IQuestionBankDAO questionBankDAO; 
@@ -36,6 +35,7 @@ public class QuestionBank implements IQuestionBank{
 	private OrikaBeanMapper orikaBeanMapper;
 	
 	@Override
+	@Transactional(readOnly=false)
 	public List<QuestionVO> importQuestions(InputStream stream) throws InvalidFormatException {
 		List<QuestionVO> questionVOs = new ArrayList<>();
 		try {
@@ -59,7 +59,7 @@ public class QuestionBank implements IQuestionBank{
 		return questionVOs;
 	}
 	
-	@Transactional(readOnly=false)
+	
 	private void insertQuestions(List<QuestionVO> questionVOs) {
 		if(questionVOs!=null && !questionVOs.isEmpty()){
 			List<QuestionBean> questionBeanList = new ArrayList<>();
@@ -74,8 +74,8 @@ public class QuestionBank implements IQuestionBank{
 			}
 			questionBankDAO.insertQuestions(questionBeanList);
 		}
-
 	}
+	
 	/**
 	 * @param row
 	 * @return

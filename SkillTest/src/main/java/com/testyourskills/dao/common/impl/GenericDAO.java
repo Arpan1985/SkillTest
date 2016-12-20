@@ -74,7 +74,7 @@ implements IGenericDAO<T,PK>
 	 * @param sessionFactory
 	 */
 	public void setSessionFactory(final SessionFactory sRessionFactory) {
-		this.sessionFactory = sessionFactory;
+		this.sessionFactory = sRessionFactory;
 	}
 
 	/**

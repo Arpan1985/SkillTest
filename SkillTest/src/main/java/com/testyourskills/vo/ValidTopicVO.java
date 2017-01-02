@@ -1,8 +1,5 @@
 package com.testyourskills.vo;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class ValidTopicVO implements java.io.Serializable {
 
 	/**
@@ -11,7 +8,7 @@ public class ValidTopicVO implements java.io.Serializable {
 	private static final long serialVersionUID = 2121313848126772287L;
 	private Long topicId;
 	private String topicName;
-	private Long categoryId;
+	private ValidCategoryVO category;
 
 	public ValidTopicVO() {
 	}
@@ -30,12 +27,11 @@ public class ValidTopicVO implements java.io.Serializable {
 	public void setTopicName(String topicName) {
 		this.topicName = topicName;
 	}
-
-	public Long getCategoryId() {
-		return this.categoryId;
+	public ValidCategoryVO getCategory() {
+		return category;
+	}
+	public void setCategory(ValidCategoryVO category) {
+		this.category = category;
 	}
 
-	public void setCategoryId(Long categoryId) {
-		this.categoryId = categoryId;
-	}
 }

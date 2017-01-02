@@ -21,7 +21,7 @@ public class QuestionBankDAO extends GenericDAO<QuestionBean, Serializable> impl
 	@Override
 	public void insertQuestions(final List<QuestionBean> questions) {
 		for (QuestionBean questionBean : questions) {
-			questionBean.get
+			questionBean.getValidTopic().getCategory();
 			super.saveOrUpdate(questionBean);
 		}
 	}

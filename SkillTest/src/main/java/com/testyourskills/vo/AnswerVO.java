@@ -8,8 +8,8 @@ public class AnswerVO implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 9212769628308144916L;
 	private Long answerId;
-	private QuestionVO questionVO;
-	private OptionsVO optionsVO;
+	private QuestionVO question;
+	private OptionsVO options;
 
 	public AnswerVO() {
 	}
@@ -23,19 +23,19 @@ public class AnswerVO implements java.io.Serializable {
 	}
 
 	public QuestionVO getQuestion() {
-		return this.questionVO;
+		return this.question;
 	}
 
-	public void setQuestion(QuestionVO questionVO) {
-		this.questionVO = questionVO;
+	public void setQuestion(QuestionVO question) {
+		this.question = question;
 	}
 
 	public OptionsVO getOptions() {
-		return this.optionsVO;
+		return this.options;
 	}
 
-	public void setOptions(OptionsVO optionsVO) {
-		this.optionsVO = optionsVO;
+	public void setOptions(OptionsVO options) {
+		this.options = options;
 	}
 
 }

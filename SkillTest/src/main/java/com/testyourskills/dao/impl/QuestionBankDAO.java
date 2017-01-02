@@ -10,6 +10,7 @@ import com.testyourskills.dao.IQuestionBankDAO;
 import com.testyourskills.dao.common.impl.GenericDAO;
 import com.testyourskills.entitybean.QuestionBean;
 import com.testyourskills.entitybean.ValidCategoryBean;
+import com.testyourskills.entitybean.ValidTopicBean;
 
 @Repository
 public class QuestionBankDAO extends GenericDAO<QuestionBean, Serializable> implements IQuestionBankDAO {
@@ -21,7 +22,6 @@ public class QuestionBankDAO extends GenericDAO<QuestionBean, Serializable> impl
 	@Override
 	public void insertQuestions(final List<QuestionBean> questions) {
 		for (QuestionBean questionBean : questions) {
-			questionBean.getValidTopic().getValidCategory();
 			super.saveOrUpdate(questionBean);
 		}
 	}
@@ -38,5 +38,19 @@ public class QuestionBankDAO extends GenericDAO<QuestionBean, Serializable> impl
 			}
 		}
 		return category;
+	}
+	
+	@Override
+	public ValidTopicBean fetchValidTopic(final String topicName) {
+		ValidTopicBean topic=null;
+		Query searchQuery = getSession().getNamedQuery("getTopic");
+		searchQuery.setParameter("topicName", topicName);
+		if(searchQuery!=null){
+			List<ValidTopicBean> result = searchQuery.list();
+			if(result!=null && !result.isEmpty()){
+				topic=result.get(0);
+			}
+		}
+		return topic;
 	}
 }

@@ -11,9 +11,9 @@ public class OptionsVO implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Long optionId;
-	private QuestionVO questionVO;
+	private QuestionVO question;
 	private String optnDesc;
-	private Set<AnswerVO> answerVOs = new HashSet<AnswerVO>(0);
+	private Set<AnswerVO> answers = new HashSet<AnswerVO>(0);
 
 	public OptionsVO() {
 	}
@@ -28,11 +28,11 @@ public class OptionsVO implements java.io.Serializable {
 	}
 
 	public QuestionVO getQuestion() {
-		return this.questionVO;
+		return this.question;
 	}
 
-	public void setQuestion(QuestionVO questionVO) {
-		this.questionVO = questionVO;
+	public void setQuestion(QuestionVO question) {
+		this.question = question;
 	}
 
 	public String getOptnDesc() {
@@ -44,11 +44,11 @@ public class OptionsVO implements java.io.Serializable {
 	}
 
 	public Set<AnswerVO> getAnswers() {
-		return this.answerVOs;
+		return this.answers;
 	}
 
-	public void setAnswers(Set<AnswerVO> answerVOs) {
-		this.answerVOs = answerVOs;
+	public void setAnswers(Set<AnswerVO> answers) {
+		this.answers = answers;
 	}
 
 }

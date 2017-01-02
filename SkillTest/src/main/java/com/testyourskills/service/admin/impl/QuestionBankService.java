@@ -70,6 +70,7 @@ public class QuestionBankService implements IQuestionBankService{
 					continue;
 				}
 				QuestionBean questions = orikaBeanMapper.map(questionVO, QuestionBean.class);
+				questions.setValidTopic(questionBankDAO.fetchValidTopic(questionVO.getValidTopic().getTopicName().toLowerCase()));
 				questionBeanList.add(questions);
 			}
 			questionBankDAO.insertQuestions(questionBeanList);
@@ -88,14 +89,16 @@ public class QuestionBankService implements IQuestionBankService{
 		List<AnswerVO> answers = new ArrayList<>();
 		while (cellIterator.hasNext()) {
 			Cell cell = cellIterator.next();
+			ValidCategoryVO validCategoryVO = new ValidCategoryVO();
 			switch (cell.getColumnIndex()) {
 			case 0:
-				ValidCategoryVO validCategoryVO = new ValidCategoryVO();
 				validCategoryVO.setCategoryName(cell.getStringCellValue());
 				break;
 			case 1:
 				ValidTopicVO topicVO = new ValidTopicVO();
+				topicVO.setCategory(validCategoryVO);
 				topicVO.setTopicName(cell.getStringCellValue());
+				questionVO.setValidTopic(topicVO);
 				break;
 			case 2:
 				questionVO.setQnDesc(cell.getStringCellValue() );
@@ -106,6 +109,7 @@ public class QuestionBankService implements IQuestionBankService{
 			case 6:
 				OptionsVO option = new OptionsVO();
 				option.setOptnDesc(cell.getStringCellValue());
+				option.setQuestion(questionVO);
 				options.add(option);
 				break;
 			case 7:
@@ -126,6 +130,7 @@ public class QuestionBankService implements IQuestionBankService{
 					if(singleAnswer.equalsIgnoreCase("Option4")){
 						answer.setOptions(options.get(3));
 					}
+					answer.setQuestion(questionVO);
 					answers.add(answer);
 				}
 				break;

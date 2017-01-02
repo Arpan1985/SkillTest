@@ -55,12 +55,10 @@ public class OrikaBeanMapper extends ConfigurableMapper implements ApplicationCo
 	 */
 	@SuppressWarnings("rawtypes")
 	public void addMapper(Mapper<?, ?> mapper) {
-		factory.classMap(QuestionBean.class,QuestionVO.class).exclude("qnDesc")
-		.byDefault()
+		factory.classMap(QuestionBean.class,QuestionVO.class).byDefault()
 		.register();
 		
 		factory.classMap(QuestionVO.class,QuestionBean.class)
-		.exclude("qnDesc")
 		.byDefault()
 		.register();
 		
